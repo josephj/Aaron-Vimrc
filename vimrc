@@ -19,6 +19,8 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set autoread
+set nowrap
+set pastetoggle=<F9>
 let g:SuperTabDefaultCompletionType="context"
 "Tabe open
 noremap TT :tabe<Space>
@@ -30,6 +32,8 @@ map <C-o>   :NERDTreeToggle<CR>
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
 
+au BufNewFile,BufRead *.html.slim set syntax=slim
+
 " Javascript indent
 au BufNewFile,BufReadPost *.js setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
 au BufNewFile,BufReadPost *.json setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
@@ -37,9 +41,11 @@ au BufNewFile,BufReadPost *.json setl shiftwidth=2 expandtab softtabstop=2 tabst
 au BufNewFile,BufReadPost *.css setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
 au BufNewFile,BufReadPost *.scss setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
 au BufNewFile,BufReadPost *.sass setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
+
 "SCSS
 au BufRead,BufNewFile *.scss set filetype=css 
 au BufRead,BufNewFile *.sass set filetype=css 
+au BufNewFile,BufRead *.sass set syntax=sass
 
 "TagBar 
 nnoremap <C-l>  :TagbarToggle<CR>
