@@ -8,16 +8,16 @@ set background=dark
 "let g:solarized_termcolors=256
 "let g:solarized_termtrans=1
 let g:Powerline_symbols = 'fancy'
-colorscheme wombat256
+colorscheme solarized
 set number
 set cindent
 set smartindent
 set autoindent
 set laststatus=2
 set expandtab
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set autoread
 let g:SuperTabDefaultCompletionType="context"
 "Tabe open
@@ -34,8 +34,12 @@ au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab softtabstop=2 tab
 au BufNewFile,BufReadPost *.js setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
 au BufNewFile,BufReadPost *.json setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
 
+au BufNewFile,BufReadPost *.css setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
+au BufNewFile,BufReadPost *.scss setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
+au BufNewFile,BufReadPost *.sass setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
 "SCSS
 au BufRead,BufNewFile *.scss set filetype=css 
+au BufRead,BufNewFile *.sass set filetype=css 
 
 "TagBar 
 nnoremap <C-l>  :TagbarToggle<CR>
@@ -97,3 +101,8 @@ endif
 
 let g:acp_behaviorUserDefinedMeets = 'acp#meetsForKeyword'
 let g:acp_behaviorUserDefinedFunction = 'syntaxcomplete#Complete'
+
+" Create a template file.
+autocmd BufNewFile *.html so ~/.vim/html.txt
+autocmd BufNewFile *.html exe "1," . 10 . "g/name=\"created\" content=\".*\"/s//name=\"created\" content=\"" .strftime("%Y-%m-%d"). "\""
+autocmd BufWritePre,FileWritePre *.html exe "1," . 10 . "g/name=\"modified\" content=\".*\"/s//name=\"modified\" content=\"" .strftime("%c"). "\""
