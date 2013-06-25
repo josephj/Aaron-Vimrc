@@ -29,7 +29,6 @@ set pastetoggle=<F9>
 set hlsearch
 set incsearch
 
-hi Comment term=standout cterm=bold ctermfg=0
 highlight Search term=reverse ctermbg=3 ctermfg=0
 
 let g:SuperTabDefaultCompletionType="context"
@@ -54,17 +53,17 @@ au BufNewFile,BufReadPost *.scss setl shiftwidth=2 expandtab softtabstop=2 tabst
 au BufNewFile,BufReadPost *.sass setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
 
 "SCSS
-au BufRead,BufNewFile *.scss set filetype=css 
-au BufRead,BufNewFile *.sass set filetype=css 
+au BufRead,BufNewFile *.scss set filetype=css
+au BufRead,BufNewFile *.sass set filetype=css
 au BufNewFile,BufRead *.sass set syntax=sass
 
-"TagBar 
+"TagBar
 nnoremap <C-l>  :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
 "SwitchTab
 imap jj <ESC>
-imap kk <ESC> 
+imap kk <ESC>
 
 setlocal omnifunc=syntaxcomplete#Complete
 
@@ -125,3 +124,12 @@ endif
 
 let g:acp_behaviorUserDefinedMeets = 'acp#meetsForKeyword'
 let g:acp_behaviorUserDefinedFunction = 'syntaxcomplete#Complete'
+
+" Removes tailing spaces.
+au! BufWrite * mark ' | silent! %s/\s\+$// | norm ''
+" Replaces tab to spaces.
+au BufWrite * :retab
+" Highlights characters over 80
+highlight OverLength ctermbg=red ctermfg=white guibg=#cccccc
+match OverLength /\%81v.\+/
+
