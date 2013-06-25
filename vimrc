@@ -96,8 +96,15 @@ let g:tagbar_type_scss = {
     \ ],
     \ }
 
-
-
+let g:tagbar_type_javascript = {
+    \ 'ctagstype' : 'JavaScript',
+    \ 'kinds'     : [
+        \ 'o:objects',
+        \ 'f:functions',
+        \ 'a:arrays',
+        \ 's:strings'
+    \ ]
+\ }
 
 highlight Normal ctermbg=none
 if executable('coffeetags')
