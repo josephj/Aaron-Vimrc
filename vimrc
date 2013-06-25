@@ -2,8 +2,13 @@ set encoding=utf-8
 call pathogen#infect()
 filetype on
 filetype indent on
-filetype plugin on
+if &diff
+    filetype plugin off
+else
+    filetype plugin on
+endif
 syntax enable
+
 set background=dark
 "let g:solarized_termcolors=256
 "let g:solarized_termtrans=1
@@ -21,6 +26,12 @@ set softtabstop=2
 set autoread
 set nowrap
 set pastetoggle=<F9>
+set hlsearch
+set incsearch
+
+hi Comment term=standout cterm=bold ctermfg=0
+highlight Search term=reverse ctermbg=3 ctermfg=0
+
 let g:SuperTabDefaultCompletionType="context"
 "Tabe open
 noremap TT :tabe<Space>
@@ -107,8 +118,3 @@ endif
 
 let g:acp_behaviorUserDefinedMeets = 'acp#meetsForKeyword'
 let g:acp_behaviorUserDefinedFunction = 'syntaxcomplete#Complete'
-
-" Create a template file.
-autocmd BufNewFile *.html so ~/.vim/html.txt
-autocmd BufNewFile *.html exe "1," . 10 . "g/name=\"created\" content=\".*\"/s//name=\"created\" content=\"" .strftime("%Y-%m-%d"). "\""
-autocmd BufWritePre,FileWritePre *.html exe "1," . 10 . "g/name=\"modified\" content=\".*\"/s//name=\"modified\" content=\"" .strftime("%c"). "\""
