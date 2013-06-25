@@ -133,6 +133,10 @@ au BufWrite * :retab
 highlight OverLength ctermbg=red ctermfg=white guibg=#cc0000
 match OverLength /\%81v.\+/
 
-" Make vim setting works immediately.
+" Makes vim setting works immediately.
 autocmd! BufWritePost .vimrc source %
 
+" Creates HTML skeleton when file extension is *.html
+autocmd BufNewFile *.html so ~/.vim/html.txt
+autocmd BufNewFile *.html exe "1," . 10 . "g/name=\"created\" content=\".*\"/s//name=\"created\" content=\"" .strftime("%Y-%m-%d"). "\""
+autocmd BufWritePre,FileWritePre *.html exe "1," . 10 . "g/name=\"modified\" content=\".*\"/s//name=\"modified\" content=\"" .strftime("%c"). "\""
