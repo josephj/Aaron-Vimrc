@@ -130,6 +130,9 @@ au! BufWrite * mark ' | silent! %s/\s\+$// | norm ''
 " Replaces tab to spaces.
 au BufWrite * :retab
 " Highlights characters over 80
-highlight OverLength ctermbg=red ctermfg=white guibg=#cccccc
+highlight OverLength ctermbg=red ctermfg=white guibg=#cc0000
 match OverLength /\%81v.\+/
+
+" Make vim setting works immediately.
+autocmd! BufWritePost .vimrc source %
 
