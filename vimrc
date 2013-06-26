@@ -143,3 +143,6 @@ autocmd BufWritePre,FileWritePre *.html exe "1," . 10 . "g/name=\"modified\" con
 
 " JSLint
 map <buffer><silent> <F8> :w<CR>:make %<CR>:cw<CR>
+
+" Click F3 to output debug message in view
+map <F3> o"<%= debug(@) %><Esc>F$@
