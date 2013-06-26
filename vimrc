@@ -140,3 +140,6 @@ autocmd! BufWritePost .vimrc source %
 autocmd BufNewFile *.html so ~/.vim/html.txt
 autocmd BufNewFile *.html exe "1," . 10 . "g/name=\"created\" content=\".*\"/s//name=\"created\" content=\"" .strftime("%Y-%m-%d"). "\""
 autocmd BufWritePre,FileWritePre *.html exe "1," . 10 . "g/name=\"modified\" content=\".*\"/s//name=\"modified\" content=\"" .strftime("%c"). "\""
+
+" JSLint
+map <buffer><silent> <F8> :w<CR>:make %<CR>:cw<CR>
