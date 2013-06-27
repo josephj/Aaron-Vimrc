@@ -16,7 +16,7 @@ set expandtab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
-set ignorecase 
+set ignorecase
 set ruler
 set cursorline
 set cursorcolumn
@@ -74,17 +74,17 @@ au BufNewFile,BufReadPost *.json setl shiftwidth=2 expandtab softtabstop=2 tabst
 au BufNewFile,BufReadPost *.css setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
 au BufNewFile,BufReadPost *.scss setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
 au BufNewFile,BufReadPost *.sass setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
-au BufRead,BufNewFile *.scss set filetype=css 
-au BufRead,BufNewFile *.sass set filetype=css 
+au BufRead,BufNewFile *.scss set filetype=css
+au BufRead,BufNewFile *.sass set filetype=css
 au BufNewFile,BufRead *.sass set syntax=sass
 
-"TagBar 
+"TagBar
 nnoremap <C-l>  :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
 "SwitchTab
 imap jj <ESC>
-imap kk <ESC> 
+imap kk <ESC>
 
 setlocal omnifunc=syntaxcomplete#Complete
 
@@ -140,11 +140,11 @@ au! BufWrite * mark ' | silent! %s/\s\+$// | norm ''
 " Replaces tab to spaces.
 au BufWrite * :retab
 " Highlights characters over 80
-highlight OverLength ctermbg=red ctermfg=white guibg=#cc0000
+highlight OverLength ctermbg=5 ctermfg=white guibg=#cc0000
 match OverLength /\%81v.\+/
 
 " Makes vim setting works immediately.
-autocmd! BufWritePost .vimrc source %
+autocmd! BufWritePost setting.vim source %
 
 " Creates HTML skeleton when file extension is *.html
 autocmd BufNewFile *.html so ~/.vim/html.txt
@@ -156,3 +156,12 @@ map <buffer><silent> <F8> :w<CR>:make %<CR>:cw<CR>
 
 " Click F3 to output debug message in view
 map <F3> o"<%= debug(@) %><Esc>F$@
+
+" Disable useless HTML rendering (<a/>, <em/>, <strong/>)
+let html_no_rendering=1
+
+" Set tab settings.
+highlight TabLine cterm=none ctermbg=4 gui=none
+highlight TabLineFill ctermbg=10
+highlight TabLineSel ctermbg=1
+
