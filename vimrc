@@ -9,8 +9,8 @@ else
 endif
 syntax enable
 set t_Co=256
-"colorscheme solarized
-colors hemisu
+colorscheme solarized
+"colors hemisu
 
 " Leader Key
 let mapleader = ","

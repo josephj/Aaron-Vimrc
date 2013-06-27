@@ -5,7 +5,7 @@ set title
 set nobackup        " no backup file
 set noswapfile      " no swap file
 
-set list listchars=tab:»·,trail:·
+"set list listchars=tab:»·,trail:·
 
 set number
 set cindent
@@ -51,7 +51,7 @@ map <C-o>   :NERDTreeToggle<CR>
 
 " Setting Highlight color
 hi cursorcolumn   ctermbg=black
-hi CursorLine     cterm=underline ctermbg=black
+hi CursorLine     cterm=none ctermbg=black
 hi LineNr         ctermbg=23 ctermfg=73
 hi Normal ctermbg=none
 hi TabLineSel ctermfg=white ctermbg=52
@@ -134,3 +134,25 @@ endif
 
 let g:acp_behaviorUserDefinedMeets = 'acp#meetsForKeyword'
 let g:acp_behaviorUserDefinedFunction = 'syntaxcomplete#Complete'
+
+" Removes tailing spaces.
+au! BufWrite * mark ' | silent! %s/\s\+$// | norm ''
+" Replaces tab to spaces.
+au BufWrite * :retab
+" Highlights characters over 80
+highlight OverLength ctermbg=red ctermfg=white guibg=#cc0000
+match OverLength /\%81v.\+/
+
+" Makes vim setting works immediately.
+autocmd! BufWritePost .vimrc source %
+
+" Creates HTML skeleton when file extension is *.html
+autocmd BufNewFile *.html so ~/.vim/html.txt
+autocmd BufNewFile *.html exe "1," . 10 . "g/name=\"created\" content=\".*\"/s//name=\"created\" content=\"" .strftime("%Y-%m-%d"). "\""
+autocmd BufWritePre,FileWritePre *.html exe "1," . 10 . "g/name=\"modified\" content=\".*\"/s//name=\"modified\" content=\"" .strftime("%c"). "\""
+
+" JSLint
+map <buffer><silent> <F8> :w<CR>:make %<CR>:cw<CR>
+
+" Click F3 to output debug message in view
+map <F3> o"<%= debug(@) %><Esc>F$@
