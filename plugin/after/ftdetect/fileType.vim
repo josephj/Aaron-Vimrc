@@ -6,7 +6,6 @@ autocmd! BufNewFile,BufRead *.m set filetype=objc
 autocmd! BufNewFile,BufRead *.as set filetype=actionscript
 autocmd! BufNewFile,BufRead *.mxml set filetype=mxml
 
-
 " SCSS
 autocmd! BufNewFile,BufRead *.scss set filetype=scss.css
 
@@ -33,4 +32,7 @@ autocmd! BufNewFile,BufRead nginx.conf set filetype=nginx
 
 " CocoaPods
 autocmd! BufNewFile,BufRead Podfile,*.podspec set filetype=ruby
+
+" Coffee
+autocmd! BufNewFile,BufRead *.coffee.erb set filetype=coffee
 

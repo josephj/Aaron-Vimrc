@@ -1,5 +1,57 @@
+" disable sound on errors
+set noerrorbells
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Search Dash for word under cursor
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! SearchDash()
+  let s:browser = "/usr/bin/open"
+  let s:wordUnderCursor = expand("<cword>")
+  let s:url = "dash://".s:wordUnderCursor
+  let s:cmd ="silent ! " . s:browser . " " . s:url
+  execute s:cmd
+  redraw!
+endfunction
+map <leader>d :call SearchDash()<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RENAME CURRENT FILE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+map <leader>n :call RenameFile()<cr>
+
+let g:rails_projections = {
+      \ "app/presenters/*.rb": { "command": "presenters" },
+      \ "app/observers/*.rb": { "command": "observers" },
+      \ "app/services/*.rb": { "command": "services" },
+      \ "app/extras/form_object/*.rb": {"command": "forms"},
+      \ "app/forms/*.rb": {"command": "forms"},
+      \ "app/extras/service/*.rb": {"command": ["services", "forms", "models"]},
+      \ "app/extras/view_object/*.rb": {"command": "views"},
+      \ "app/models/fields/*.rb": {"command": "fields"},
+      \ "app/models/fields_data/*.rb": {"command": "fields"},
+      \ "app/models/concerns/*.rb": {"command": ["models", "concerns"]},
+      \ "app/models/reports/*.rb": {"command": "reports"},
+      \ "spec/factories/*.rb": {"command": "factories"},
+      \ "spec/factories/fields/*.rb": {"command": "factories"},
+      \ "spec/features/*.rb": {"command": "features"},
+      \ "spec/support/*.rb": {"command": "supports"},
+      \ "lib/tasks/*.rake": {"alternate": ["spec/lib/tasks/%s.rake_spec.rb"]},
+      \ "app/assets/javascripts/*.js.coffee": {"alternate": ["spec/javascripts/%s_spec.js.coffee"]},
+      \ "spec/javascripts/*_spec.js.coffee": {"alternate": ["app/assets/javascripts/%s.js.coffee"]}
+      \ }
+
+
 " vimrc
-set showtabline=2
+set showtabline=4
 set nobomb
 set title
 set nobackup        " no backup file
@@ -11,11 +63,11 @@ set number
 set cindent
 set smartindent
 set autoindent
-set laststatus=2
+set laststatus=4
 set expandtab
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 set ignorecase
 set ruler
 set cursorline
@@ -42,6 +94,8 @@ set wildignore+=*sass-cache*
 set wildignore+=*.DS_Store
 set wildignore+=log/**
 set wildignore+=tmp/**
+set wildignore+=vendor/**
+set wildignore+=node_modules/**
 
 "Tabe open
 noremap TT :tabe<Space>
@@ -66,12 +120,12 @@ au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab softtabstop=2 tab
 au BufNewFile,BufRead *.html.slim set syntax=slim
 
 " Javascript indent
-au BufNewFile,BufReadPost *.js setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
+au BufNewFile,BufReadPost *.js setl shiftwidth=4 expandtab softtabstop=4 tabstop=4
 au BufNewFile,BufReadPost *.json setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
 
 
 "CSS,SCSS,SASS
-au BufNewFile,BufReadPost *.css setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
+au BufNewFile,BufReadPost *.css setl shiftwidth=4 expandtab softtabstop=4 tabstop=4
 au BufNewFile,BufReadPost *.scss setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
 au BufNewFile,BufReadPost *.sass setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
 au BufNewFile,BufReadPost *.styl setl shiftwidth=2 expandtab softtabstop=2 tabstop=2
@@ -153,8 +207,8 @@ au! BufWrite * mark ' | silent! %s/\s\+$// | norm ''
 " Replaces tab to spaces.
 au BufWrite * :retab
 " Highlights characters over 80
-highlight OverLength ctermbg=5 ctermfg=white guibg=#cc0000
-match OverLength /\%81v.\+/
+" highlight OverLength ctermbg=5 ctermfg=white guibg=#cc0000
+" match OverLength /\%81v.\+/
 
 " Makes vim setting works immediately.
 autocmd! BufWritePost setting.vim source %
@@ -178,3 +232,12 @@ highlight TabLine cterm=none ctermbg=4 gui=none
 highlight TabLineFill ctermbg=10
 highlight TabLineSel ctermbg=1
 
+" Vim Tab Quick Switch
+nnoremap <C-t> :tabnew<CR>
+nnoremap <C-h> gT
+nnoremap <C-l> gt
+
+" let g:no_turbux_mappings = 1
+let g:turbux_runner  = 'tslime'
+let g:turbux_command_rspec = 'zeus rspec'
+map <leader>r <Plug>SendFocusedTestToTmux
