@@ -103,3 +103,6 @@
 [submodule "bundle/scss-syntax"]
 	path = bundle/scss-syntax
 	url = git@github.com:cakebaker/scss-syntax.vim.git
+[submodule "bundle/twig"]
+	path = bundle/twig
+	url = git@github.com:evidens/vim-twig.git
