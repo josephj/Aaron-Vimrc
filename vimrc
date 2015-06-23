@@ -20,14 +20,16 @@ let g:SuperTabDefaultCompletionType="context"
 
 set background=light
 set autoread
+set fileencodings=utf8,big5,gbk,latin1
+set fileencoding=utf8
 
 " Ignore public upload files.
-set wildignore+=*/public/uploads/*,*.so,*.swp,*.zip,*.gz
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+set wildignore+=*/public/uploads/*,*/doc/*,*.so,*.swp,*.zip,*.gz
+let g:ctrlp_custom_ignore = '\v[\/]\(.git)$'
 
 highlight SignColumn ctermbg=0
 
 set wildignore+=*/dist/*,*/node_modules/*
 au BufNewFile,BufRead *.ejs set syntax=html
 
-let g:syntastic_coffee_coffeelint_args = "--csv -f ~/coffeelint.json"
+
